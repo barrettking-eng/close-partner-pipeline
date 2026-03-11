@@ -18,8 +18,8 @@ SHEET_URL = (
 AFFILIATE_REPO  = "barrettking-eng/close-affiliate-analysis"
 SOLUTIONS_REPO  = "barrettking-eng/close-solutions-analysis"
 GH_TOKEN        = os.environ["GH_PAT"]
+MAX_DAYS        = 30   # keep last N days of snapshots
 
-# Column indices
 COL_DATE       = 0
 COL_ID         = 1
 COL_NAME       = 2
@@ -41,21 +41,7 @@ def fetch_rows():
     print(f"  {len(rows)} total rows")
     return rows
 
-def latest_per_partner(rows):
-    """Keep only the most recent snapshot row per partner ID."""
-    best = {}
-    for row in rows:
-        if len(row) < 11:
-            continue
-        pid  = row[COL_ID]
-        date = row[COL_DATE]
-        if pid not in best or date > best[pid][COL_DATE]:
-            best[pid] = row
-    result = list(best.values())
-    print(f"  {len(result)} unique partners (latest snapshot)")
-    return result
-
-# ── PARSERS ───────────────────────────────────────────────────
+# ── HELPERS ───────────────────────────────────────────────────
 def num(v, cast=int):
     try:
         return cast(float(v)) if v else 0
@@ -64,6 +50,7 @@ def num(v, cast=int):
 
 def parse(row):
     return {
+        "id":         row[COL_ID].strip(),
         "name":       row[COL_NAME].strip(),
         "email":      row[COL_EMAIL].strip(),
         "type":       row[COL_TYPE].strip(),
@@ -74,17 +61,30 @@ def parse(row):
         "approved":   row[COL_APPROVED].strip().lower() == "yes",
     }
 
-def tier_of(row):
-    t = row["type"]
-    if "Tier 3" in t: return "Tier 3"
-    if "Tier 2" in t: return "Tier 2"
+def tier_of(ptype):
+    if "Tier 3" in ptype: return "Tier 3"
+    if "Tier 2" in ptype: return "Tier 2"
     return "Tier 1"
 
-# ── AFFILIATE DATASET ─────────────────────────────────────────
-def build_affiliate(rows):
-    print("Building affiliate dataset…")
-    partners = [parse(r) for r in rows if "Affiliate" in r[COL_TYPE]]
+# ── GROUP ROWS BY DATE ─────────────────────────────────────────
+def group_by_date(rows, type_test):
+    """Returns {date: {partner_id: parsed_row}} for rows matching type_test."""
+    by_date = defaultdict(dict)
+    for row in rows:
+        if len(row) < 11:
+            continue
+        if not type_test(row[COL_TYPE]):
+            continue
+        date = row[COL_DATE]
+        pid  = row[COL_ID]
+        # For duplicate partner+date keep the row (should be unique already)
+        if pid not in by_date[date]:
+            by_date[date][pid] = parse(row)
+    return by_date
 
+# ── SNAPSHOT BUILDER ──────────────────────────────────────────
+def build_snapshot(partners, include_tier=False):
+    """Build a single-date snapshot from a list of parsed partner dicts."""
     approved = sum(1 for p in partners if p["approved"])
     active   = [p for p in partners if p["customers"] > 0]
     warm     = [p for p in partners if p["customers"] == 0 and p["clicks"] > 0]
@@ -94,12 +94,11 @@ def build_affiliate(rows):
     top_revenue   = sorted(partners, key=lambda p: p["revenue"],   reverse=True)[:10]
     warm_leads    = sorted(warm,     key=lambda p: p["clicks"],     reverse=True)[:10]
 
-    keys_c = ["name", "email", "customers", "revenue", "clicks"]
-    keys_r = ["name", "customers", "revenue", "clicks"]
-    keys_w = ["name", "email", "clicks"]
+    # Compact byId lookup for delta calculations: {id: {c, r, k}}
+    by_id = {p["id"]: {"c": p["customers"], "r": round(p["revenue"], 2), "k": p["clicks"]}
+             for p in partners}
 
-    return {
-        "lastUpdated": datetime.now(timezone.utc).strftime("%B %d, %Y"),
+    snap = {
         "totals": {
             "partners":   len(partners),
             "customers":  sum(p["customers"]  for p in partners),
@@ -115,70 +114,65 @@ def build_affiliate(rows):
             "warm":    len(warm),
             "dormant": len(dormant),
         },
-        "topCustomers": [{k: p[k] for k in keys_c} for p in top_customers],
-        "topRevenue":   [{k: p[k] for k in keys_r} for p in top_revenue],
-        "warmLeads":    [{k: p[k] for k in keys_w} for p in warm_leads],
+        "topCustomers": [
+            {k: p[k] for k in (["name","email","id","tier","customers","revenue","clicks"]
+                                if include_tier else ["name","email","id","customers","revenue","clicks"])}
+            for p in top_customers
+        ],
+        "topRevenue": [
+            {k: p[k] for k in (["name","id","tier","customers","revenue","clicks"]
+                                if include_tier else ["name","id","customers","revenue","clicks"])}
+            for p in top_revenue
+        ],
+        "warmLeads": [
+            {k: p[k] for k in (["name","email","id","tier","clicks"]
+                                if include_tier else ["name","email","id","clicks"])}
+            for p in warm_leads
+        ],
+        "byId": by_id,
     }
 
-# ── SOLUTIONS DATASET ─────────────────────────────────────────
-def build_solutions(rows):
-    print("Building solutions dataset…")
-    partners = []
-    for r in rows:
-        if "Solution Partner" in r[COL_TYPE]:
-            p = parse(r)
-            p["tier"] = tier_of(p)
-            partners.append(p)
-
-    def tier_stats(tier_name):
-        t = [p for p in partners if p["tier"] == tier_name]
-        active  = [p for p in t if p["customers"] > 0]
-        warm    = [p for p in t if p["customers"] == 0 and p["clicks"] > 0]
-        dormant = [p for p in t if p["customers"] == 0 and p["clicks"] == 0]
-        return {
-            "count":    len(t),
-            "active":   len(active),
-            "warm":     len(warm),
-            "dormant":  len(dormant),
-            "customers": sum(p["customers"] for p in t),
-            "revenue":  round(sum(p["revenue"] for p in t), 2),
-        }
-
-    active  = [p for p in partners if p["customers"] > 0]
-    warm    = [p for p in partners if p["customers"] == 0 and p["clicks"] > 0]
-    dormant = [p for p in partners if p["customers"] == 0 and p["clicks"] == 0]
-
-    top_customers = sorted(partners, key=lambda p: p["customers"], reverse=True)[:20]
-    top_revenue   = sorted(partners, key=lambda p: p["revenue"],   reverse=True)[:10]
-    warm_leads    = sorted(warm,     key=lambda p: p["clicks"],     reverse=True)[:10]
-
-    keys_c = ["name", "email", "tier", "customers", "revenue", "clicks"]
-    keys_r = ["name", "tier", "customers", "revenue", "clicks"]
-    keys_w = ["name", "tier", "email", "clicks"]
-
-    return {
-        "lastUpdated": datetime.now(timezone.utc).strftime("%B %d, %Y"),
-        "totals": {
-            "partners":   len(partners),
-            "customers":  sum(p["customers"]  for p in partners),
-            "revenue":    round(sum(p["revenue"]    for p in partners), 2),
-            "commission": round(sum(p["commission"] for p in partners), 2),
-            "clicks":     sum(p["clicks"]     for p in partners),
-            "active":     len(active),
-        },
-        "activity": {
-            "active":  len(active),
-            "warm":    len(warm),
-            "dormant": len(dormant),
-        },
-        "tiers": {
+    if include_tier:
+        def tier_stats(tier_name):
+            t = [p for p in partners if p.get("tier") == tier_name]
+            act = [p for p in t if p["customers"] > 0]
+            wrm = [p for p in t if p["customers"] == 0 and p["clicks"] > 0]
+            drm = [p for p in t if p["customers"] == 0 and p["clicks"] == 0]
+            return {
+                "count":     len(t),
+                "active":    len(act),
+                "warm":      len(wrm),
+                "dormant":   len(drm),
+                "customers": sum(p["customers"] for p in t),
+                "revenue":   round(sum(p["revenue"] for p in t), 2),
+            }
+        snap["tiers"] = {
             "t3": tier_stats("Tier 3"),
             "t2": tier_stats("Tier 2"),
             "t1": tier_stats("Tier 1"),
-        },
-        "topCustomers": [{k: p[k] for k in keys_c} for p in top_customers],
-        "topRevenue":   [{k: p[k] for k in keys_r} for p in top_revenue],
-        "warmLeads":    [{k: p[k] for k in keys_w} for p in warm_leads],
+        }
+
+    return snap
+
+# ── FULL DATASET BUILDER ──────────────────────────────────────
+def build_dataset(rows, type_test, include_tier=False):
+    by_date = group_by_date(rows, type_test)
+    sorted_dates = sorted(by_date.keys())[-MAX_DAYS:]  # keep last MAX_DAYS
+
+    snapshots = {}
+    for date in sorted_dates:
+        partners = list(by_date[date].values())
+        if include_tier:
+            for p in partners:
+                p["tier"] = tier_of(p["type"])
+        snapshots[date] = build_snapshot(partners, include_tier=include_tier)
+        print(f"  {date}: {len(partners)} partners")
+
+    return {
+        "generatedAt":   datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "availableDates": sorted_dates,
+        "latest":        sorted_dates[-1] if sorted_dates else None,
+        "snapshots":     snapshots,
     }
 
 # ── GITHUB PUSH ───────────────────────────────────────────────
@@ -187,18 +181,16 @@ def push_file(repo, path, content_str, token):
     api_url = f"https://api.github.com/repos/{repo}/contents/{path}"
     headers = {
         "Authorization": f"token {token}",
-        "Accept": "application/vnd.github.v3+json",
-        "Content-Type": "application/json",
+        "Accept":        "application/vnd.github.v3+json",
+        "Content-Type":  "application/json",
     }
-
-    # Get current SHA if file already exists
     sha = None
     req = urllib.request.Request(api_url, headers=headers)
     try:
         with urllib.request.urlopen(req) as r:
             sha = json.loads(r.read())["sha"]
     except urllib.error.HTTPError:
-        pass  # file doesn't exist yet
+        pass
 
     body = {
         "message": f"Auto-update {path} — {datetime.now(timezone.utc).strftime('%Y-%m-%d')}",
@@ -207,29 +199,24 @@ def push_file(repo, path, content_str, token):
     if sha:
         body["sha"] = sha
 
-    req = urllib.request.Request(
-        api_url,
-        data=json.dumps(body).encode(),
-        headers=headers,
-        method="PUT",
-    )
+    req = urllib.request.Request(api_url, data=json.dumps(body).encode(),
+                                  headers=headers, method="PUT")
     with urllib.request.urlopen(req) as r:
-        result = json.loads(r.read())
+        json.loads(r.read())
     print(f"  ✓ Pushed {path} → {repo}")
 
 # ── MAIN ──────────────────────────────────────────────────────
 if __name__ == "__main__":
-    rows   = fetch_rows()
-    latest = latest_per_partner(rows)
+    rows = fetch_rows()
 
-    aff_data = build_affiliate(latest)
-    push_file(AFFILIATE_REPO, "data.json", json.dumps(aff_data, indent=2), GH_TOKEN)
-    print(f"  Affiliates: {aff_data['totals']['partners']} partners, "
-          f"${aff_data['totals']['revenue']:,.0f} revenue")
+    print("\nBuilding affiliate dataset…")
+    aff_data = build_dataset(rows, lambda t: "Affiliate" in t, include_tier=False)
+    push_file(AFFILIATE_REPO, "data.json",
+              json.dumps(aff_data, separators=(',', ':')), GH_TOKEN)
 
-    sol_data = build_solutions(latest)
-    push_file(SOLUTIONS_REPO, "data.json", json.dumps(sol_data, indent=2), GH_TOKEN)
-    print(f"  Solutions:  {sol_data['totals']['partners']} partners, "
-          f"${sol_data['totals']['revenue']:,.0f} revenue")
+    print("\nBuilding solutions dataset…")
+    sol_data = build_dataset(rows, lambda t: "Solution Partner" in t, include_tier=True)
+    push_file(SOLUTIONS_REPO, "data.json",
+              json.dumps(sol_data, separators=(',', ':')), GH_TOKEN)
 
     print("\nDone.")
