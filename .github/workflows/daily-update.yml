@@ -1,0 +1,28 @@
+name: Daily Partner Dashboard Update
+
+on:
+  schedule:
+    - cron: '30 11 * * *'   # 11:30 UTC = 6:30 AM ET (EST) / 7:30 AM ET (EDT)
+  workflow_dispatch:         # allow manual trigger from GitHub UI
+
+jobs:
+  update-dashboards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout pipeline repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate and push data.json to both dashboards
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: python generate.py
+
+      - name: Log completion
+        run: echo "Dashboards updated at $(date -u)"
