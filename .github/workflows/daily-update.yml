@@ -22,6 +22,8 @@ jobs:
       - name: Generate and push data.json to both dashboards
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
+          PS_PUBLIC_KEY: ${{ secrets.PS_PUBLIC_KEY }}
+          PS_SECRET_KEY: ${{ secrets.PS_SECRET_KEY }}
         run: python generate.py
 
       - name: Log completion
