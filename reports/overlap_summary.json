@@ -1,0 +1,185 @@
+{
+  "generatedAt": "2026-03-17T20:02:49Z",
+  "matched_close_leads": 14111,
+  "multi_partner": 87,
+  "single_partner": 14024,
+  "unmatched_ps_customers": 462,
+  "runtime_seconds": 943,
+  "top_multi_partner": [
+    {
+      "company": "IMMOment 0711 GmbH",
+      "lead_id": "lead_4ruTAVAKRxps6X3uFWZaFi5sDLP65Al5CZbJ7VlxCT3",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Fahimai Fahimai | Ricardo Ruppert"
+    },
+    {
+      "company": "Justin Wolfelsberger",
+      "lead_id": "lead_jpkLIonEteINtni0CRY18iSx85KjRst75ZodZqRqE4M",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "BlogX BlogX | Max Loesch"
+    },
+    {
+      "company": "AI Store Builder",
+      "lead_id": "lead_wQKDGRIEapOySgAKpAv5aIP4ybWqfKG0Pyq1ZHw4CTU",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Nga Tr\u1ea7n | M\u00e1t\u00e9 G\u00e9recz"
+    },
+    {
+      "company": "Vorwald Consulting",
+      "lead_id": "lead_QPeopNWEVPVVMEmfsAIvFF5QTcZXO5KAayhdC4JLiku",
+      "status": "Trial Expired",
+      "partner_count": 2,
+      "partners": "Ben B Bao | Stefan Graf"
+    },
+    {
+      "company": "Primed Agency",
+      "lead_id": "lead_36ekjNekFwnWgbFv8uhnyLeBUo92KNf5Ml1wIZlyOP0",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Ben B Bao | Yabku Pathak"
+    },
+    {
+      "company": "Coding Akademie 20020",
+      "lead_id": "lead_KRAwpSNPTZKXrvAjNlYllPdjrPAlQvwEtS9KGyCX6Cb",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Helmut Berka | BloggingX ReachX"
+    },
+    {
+      "company": "Eva Hummler",
+      "lead_id": "lead_Vwukn21Y7ssno6JawKGzemn6f8IYxUS0POlHuqIH7jQ",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Ben B Bao | USD Hinh"
+    },
+    {
+      "company": "Tauro Acquisition",
+      "lead_id": "lead_slr03wt9NC8yGnxQcPDGxfrP7mcwqFBLsPJJRaogdyd",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Hinh Mx | Richard Hinh"
+    },
+    {
+      "company": "Winter Media",
+      "lead_id": "lead_Vn7Zomo0sjQ64mTAAe5RZTfKmw1LlX5qrKgz6ui62Kv",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Digital Hieusmarketer | Trung Nguyen"
+    },
+    {
+      "company": "Urban Unity",
+      "lead_id": "lead_exn0qKgRaRsUvbXNfF7taHIHHWpO7xAVEDZPL1AQTE6",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Giang Ng\u00f4 | Richard Hinh"
+    },
+    {
+      "company": "Erhard Media eG",
+      "lead_id": "lead_9EXdBVE1bythQGpL1cmyDSkzAWiMWgSuXzc6KfUBtUD",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Alexander Daskaloff | Richard Hinh"
+    },
+    {
+      "company": "Kenan Grace University",
+      "lead_id": "lead_fiDKjpQvMnjkufS0scmqFZVj4okc83rnKn8tdF8sKU0",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Will Weatherly | Alex Quigley"
+    },
+    {
+      "company": "Kevin Paladin",
+      "lead_id": "lead_lLsJXXZBiiZCwmPs39nUo7evEs76ryrqJZcev1kBiBy",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Alla Golovanova | My Teresa"
+    },
+    {
+      "company": "Power",
+      "lead_id": "lead_BvCCNqbKJ6tzPKJJ79cC3S2xzBs7HOPyvGDiTFdNUQI",
+      "status": "Canceled",
+      "partner_count": 2,
+      "partners": "Leanne Clark | Alex Quigley"
+    },
+    {
+      "company": "Temmer & Bansal GmbH",
+      "lead_id": "lead_JQpBDPsyfd3KKGkzrPuHh1fM8tLzCKfoAUPXzIlqaCp",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "USD Hinh | Huy Nguyen Minh Dinh"
+    },
+    {
+      "company": "Pioneer People GmbH",
+      "lead_id": "lead_2JRCXIvhB64CsKnoe2qkTaEFaoSpHm8CrMWVObGGG6a",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "M\u00e1t\u00e9 G\u00e9recz | Ricardo Ruppert"
+    },
+    {
+      "company": "Nespola",
+      "lead_id": "lead_eoyJMyUUgAQLXjpxH2jpvMwex2YftSlcSTAnPJNPWpd",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "M\u00e1t\u00e9 G\u00e9recz | Avi Grondin"
+    },
+    {
+      "company": "GK Digital Money Maker UG",
+      "lead_id": "lead_JhP6IIt055clPI9qROUhzu4wCfEUxVg3n4yCzANjhGm",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Leon Pyka | bj\u00f6rn ebersp\u00e4cher"
+    },
+    {
+      "company": "Athletic Media",
+      "lead_id": "lead_udWxOJfEQT9uaZCCzSz2mNIuv6KXkGpE5tXRI4fvIV5",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Phi N\u00f4ng | Team xResults"
+    },
+    {
+      "company": "Onnix Investments",
+      "lead_id": "lead_4euxi0RG7fjsgZAeYXkQVU8dlfwvmks1Iu9UoCjz5i1",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "USD Hinh | Austin Zaback"
+    },
+    {
+      "company": "lexis",
+      "lead_id": "lead_mAobzdeVQNTgSaMLjoXXReu1tTPK3E3d0UTsyrkqNyl",
+      "status": "Trial Expired",
+      "partner_count": 2,
+      "partners": "Sergei platunov | Richard Hinh"
+    },
+    {
+      "company": "California Shutters Inc.",
+      "lead_id": "lead_IXBT2wLdACsZc0OrxGTluxvDdX74iSD21ugmeOJuDiM",
+      "status": "Canceled",
+      "partner_count": 2,
+      "partners": "hakami stephen | Linh Tran"
+    },
+    {
+      "company": "Kuhn Immobilien",
+      "lead_id": "lead_waUCbyhG5oKNbAdrmdPV5frECBJDN3xNxgQla9ntW4d",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "My Teresa | Artem Kosarev"
+    },
+    {
+      "company": "Closer Fastlane",
+      "lead_id": "lead_J1vfArThz5G0tPWhiH5y7Uwfthlet4Cyxr8WIUEyr3y",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Richard Hinh | Justus Kraft"
+    },
+    {
+      "company": "Katja Pilz - Videoproduction",
+      "lead_id": "lead_t7XZwuPQLrGCtBnbxAwNOJWAz0uxENECbz3Z6EhsCS0",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Richard Hinh | Hinh Mx"
+    }
+  ]
+}
