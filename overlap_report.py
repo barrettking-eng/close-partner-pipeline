@@ -234,7 +234,7 @@ def format_overlap_rows(by_lead):
             "partner_names":  " | ".join(p["name"]  for p in partners),
             "partner_emails": " | ".join(p["email"] for p in partners),
             "partner_types":  " | ".join(p["type"]  for p in partners),
-            "customer_keys":  " | ".join(p["customer_key"] for p in partners),
+            "customer_keys":  " | ".join(p["customer_key"] or "" for p in partners),
         })
     rows.sort(key=lambda r: -r["partner_count"])
     return rows
