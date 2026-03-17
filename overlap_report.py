@@ -310,24 +310,70 @@ if __name__ == "__main__":
         "partner_email", "partner_type", "partner_slug",
     ]
 
-    # 6. Summary JSON (top 25 multi-partner, headline counts)
+    # 6. Build dashboard data payload
+    from collections import Counter
+    overall_statuses  = Counter(r["lead_status"] for r in overlap_rows)
+    multi_rows        = [r for r in overlap_rows if r["partner_count"] > 1]
+    multi_statuses    = Counter(r["lead_status"] for r in multi_rows)
+    partner_freq      = Counter()
+    for r in multi_rows:
+        for p in r["partner_names"].split(" | "):
+            if p.strip():
+                partner_freq[p.strip()] += 1
+
+    dashboard_data = {
+        "generatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "stats": {
+            "matched_leads":    len(by_lead),
+            "multi_partner":    multi,
+            "single_partner":   single,
+            "unmatched":        len(unmatched),
+            "active_multi":     multi_statuses.get("Customer", 0),
+            "runtime_seconds":  elapsed,
+        },
+        "overallStatuses": [
+            {"status": s, "count": c}
+            for s, c in overall_statuses.most_common()
+        ],
+        "multiPartnerStatuses": [
+            {"status": s, "count": c}
+            for s, c in multi_statuses.most_common()
+        ],
+        "partnerFrequency": [
+            {"name": p, "accounts": c}
+            for p, c in partner_freq.most_common(15)
+        ],
+        "multiAccounts": [
+            {
+                "lead_id":       r["close_lead_id"],
+                "company":       r["company_name"],
+                "status":        r["lead_status"],
+                "partner_count": r["partner_count"],
+                "partners":      r["partner_names"].split(" | "),
+                "partner_types": r["partner_types"].split(" | "),
+                "emails":        r["contact_emails"],
+            }
+            for r in multi_rows
+        ],
+    }
+
     summary = {
-        "generatedAt":           datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "matched_close_leads":   len(by_lead),
-        "multi_partner":         multi,
-        "single_partner":        single,
+        "generatedAt":            dashboard_data["generatedAt"],
+        "matched_close_leads":    len(by_lead),
+        "multi_partner":          multi,
+        "single_partner":         single,
         "unmatched_ps_customers": len(unmatched),
-        "runtime_seconds":       elapsed,
+        "runtime_seconds":        elapsed,
         "top_multi_partner": [
             {
-                "company":      r["company_name"],
-                "lead_id":      r["close_lead_id"],
-                "status":       r["lead_status"],
+                "company":       r["company_name"],
+                "lead_id":       r["close_lead_id"],
+                "status":        r["lead_status"],
                 "partner_count": r["partner_count"],
-                "partners":     r["partner_names"],
+                "partners":      r["partner_names"],
             }
-            for r in overlap_rows if r["partner_count"] > 1
-        ][:25],
+            for r in multi_rows
+        ],
     }
 
     # 7. Push to GitHub
@@ -335,5 +381,6 @@ if __name__ == "__main__":
     push_file("reports/overlap_report.csv",       to_csv(overlap_rows,  overlap_fields))
     push_file("reports/unmatched_customers.csv",  to_csv(unmatched,     unmatched_fields))
     push_file("reports/overlap_summary.json",     json.dumps(summary, indent=2))
+    push_file("reports/overlap_data.json",        json.dumps(dashboard_data, separators=(',', ':')))
 
     print("\nDone.")
