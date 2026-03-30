@@ -1,38 +1,38 @@
 {
-  "generatedAt": "2026-03-23T13:29:29Z",
-  "matched_close_leads": 14304,
-  "multi_partner": 93,
-  "single_partner": 14211,
+  "generatedAt": "2026-03-30T13:43:05Z",
+  "matched_close_leads": 14534,
+  "multi_partner": 96,
+  "single_partner": 14438,
   "unmatched_ps_customers": 463,
-  "runtime_seconds": 1032,
+  "runtime_seconds": 1102,
   "top_multi_partner": [
+    {
+      "company": "Winter Media",
+      "lead_id": "lead_Vn7Zomo0sjQ64mTAAe5RZTfKmw1LlX5qrKgz6ui62Kv",
+      "status": "Customer",
+      "partner_count": 3,
+      "partners": "Nga Tr\u1ea7n | Digital Hieusmarketer | Trung Nguyen"
+    },
+    {
+      "company": "Collect & Connect",
+      "lead_id": "lead_6PzQzLFcwgzPF9BfKqgSae0jbqEKxeyaG61j6FiesfF",
+      "status": "Customer",
+      "partner_count": 3,
+      "partners": "Hinh Mx | M\u00e1t\u00e9 G\u00e9recz | Nevio Wimmler"
+    },
+    {
+      "company": "Dr. Hermes Institut AG",
+      "lead_id": "lead_5GDclYAh9ogwqUNd1dVRsiIs1bSTLPhaSJWhr7eIzJE",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "My Teresa | Huy Nguyen Minh Dinh"
+    },
     {
       "company": "PureWater Investment Deutschland",
       "lead_id": "lead_cXs2EafVPBKyclFmxPTfmuaN5eNIxbjtDtubrhT4yte",
       "status": "Canceled",
       "partner_count": 2,
       "partners": "Tools X Tech | Ricardo Ruppert"
-    },
-    {
-      "company": "Salesby",
-      "lead_id": "lead_cfEZcoI2jxfzCUpEltCId8XoVdKp3Eebyexwp2HJan1",
-      "status": "Customer",
-      "partner_count": 2,
-      "partners": "Digital Clicktoolz | Ricardo Ruppert"
-    },
-    {
-      "company": "BlueNodes",
-      "lead_id": "lead_CWL6vgsN9IfFJbBgSuhRWaYTc0khfN7Ej9Umqbujn0E",
-      "status": "Customer",
-      "partner_count": 2,
-      "partners": "Cao T\u00e0i Ph\u01b0\u1edbc | Stefan Graf"
-    },
-    {
-      "company": "gbp",
-      "lead_id": "lead_FJivni0XCxyPit818wVXJOfgotFw91g0zsF3BJsgooH",
-      "status": "Canceled",
-      "partner_count": 2,
-      "partners": "BloggingX ReachX | Alex Quigley"
     },
     {
       "company": "F Point",
@@ -49,18 +49,18 @@
       "partners": "Fahimai Fahimai | Ricardo Ruppert"
     },
     {
-      "company": "ZHFX",
-      "lead_id": "lead_VwRW5UmpklzqF4xWPEnZXjNUkZXeKZq2l0gbNu5pZES",
-      "status": "Trial Expired",
-      "partner_count": 2,
-      "partners": "My Teresa | Nga Tr\u1ea7n"
-    },
-    {
       "company": "AI Store Builder",
       "lead_id": "lead_wQKDGRIEapOySgAKpAv5aIP4ybWqfKG0Pyq1ZHw4CTU",
       "status": "Customer",
       "partner_count": 2,
       "partners": "Nga Tr\u1ea7n | M\u00e1t\u00e9 G\u00e9recz"
+    },
+    {
+      "company": "Bayview Advance",
+      "lead_id": "lead_3v22EC2DFgXvTAR6J6YM6fwK9f02CGmN7iIaILp36wR",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Digital Hieusmarketer | Hershey Klein"
     },
     {
       "company": "Vorwald Consutling",
@@ -126,6 +126,13 @@
       "partners": "Giang Ng\u00f4 | Richard Hinh"
     },
     {
+      "company": "GoodSpace Self Storage",
+      "lead_id": "lead_QZJQTvVpq9l63oFFCyRfqVPMMYF25nv2nnv7X6Dwfbs",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Leanne Clark | BloggingX ReachX"
+    },
+    {
       "company": "Kingdom Reach Media",
       "lead_id": "lead_IJQ5VwIAN4e0rlcKZk7DRZw3rZoMONLDsL46fNuBn6C",
       "status": "Customer",
@@ -147,16 +154,16 @@
       "partners": "Will Weatherly | Alex Quigley"
     },
     {
-      "company": "Becker Kapitalanlagen",
-      "lead_id": "lead_mCvJ5l1pGa4D0x36aGDGmlX5dviV2aRQZVIUK22DXPx",
+      "company": "Kevin Paladin",
+      "lead_id": "lead_lLsJXXZBiiZCwmPs39nUo7evEs76ryrqJZcev1kBiBy",
       "status": "Customer",
       "partner_count": 2,
       "partners": "Alla Golovanova | My Teresa"
     },
     {
-      "company": "Collect & Connect",
-      "lead_id": "lead_6PzQzLFcwgzPF9BfKqgSae0jbqEKxeyaG61j6FiesfF",
-      "status": "Customer",
+      "company": "Millionaire Commerce",
+      "lead_id": "lead_6OXLHJbvCAHvqKtOM8R2qfdpVta3h0Q10i693WI4Zi6",
+      "status": "Canceled",
       "partner_count": 2,
       "partners": "Hinh Mx | M\u00e1t\u00e9 G\u00e9recz"
     },
@@ -191,7 +198,7 @@
     {
       "company": "Athletic Media",
       "lead_id": "lead_udWxOJfEQT9uaZCCzSz2mNIuv6KXkGpE5tXRI4fvIV5",
-      "status": "Customer",
+      "status": "Canceled",
       "partner_count": 2,
       "partners": "Phi N\u00f4ng | Team xResults"
     },
@@ -215,13 +222,6 @@
       "status": "Canceled",
       "partner_count": 2,
       "partners": "hakami stephen | Linh Tran"
-    },
-    {
-      "company": "Kuhn Immobilien",
-      "lead_id": "lead_waUCbyhG5oKNbAdrmdPV5frECBJDN3xNxgQla9ntW4d",
-      "status": "Customer",
-      "partner_count": 2,
-      "partners": "My Teresa | Artem Kosarev"
     },
     {
       "company": "Closer Fastlane",
@@ -273,11 +273,11 @@
       "partners": "TEAM MILLIONIFY | Sergei platunov"
     },
     {
-      "company": "Vibe Marketing",
-      "lead_id": "lead_x3x48LufbQm3ZnLwJTf62dTIy2nEDzp0RxQEJeWTQb5",
-      "status": "Canceled",
+      "company": "Psychedelic Concierge",
+      "lead_id": "lead_PigrS3PNvavwZlnZSB87owJxFLrLoj7gRZFVfyRfwnl",
+      "status": "Customer",
       "partner_count": 2,
-      "partners": "M\u00e1t\u00e9 G\u00e9recz | Alex Quigley"
+      "partners": "Mariah Williamson | DC Fawcett"
     },
     {
       "company": "RZ PDF Business",
@@ -364,6 +364,13 @@
       "partners": "salesHAX Consulting | Christian Stockklauser"
     },
     {
+      "company": "FASHION STYLIST ACADEMY",
+      "lead_id": "lead_XAD7k3HuBX9Nt8LgpzuPU3nkM263K1GTBq3oIZUlIAg",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Will Weatherly | Justus Kraft"
+    },
+    {
       "company": "S\u00fcdbaden Wohnkonzepte",
       "lead_id": "lead_7dJC8JSOWIPiTzNFxPPQAXksKQQPiEgFupkisDpI11i",
       "status": "Customer",
@@ -399,13 +406,6 @@
       "partners": "Muhammed Bagriacik | Ricardo Ruppert"
     },
     {
-      "company": "PLING Property Leveraging",
-      "lead_id": "lead_AxeWqXwiqOAeYwFkbwFMn61iIXWYCey8Hf00BlTrdxW",
-      "status": "Canceled",
-      "partner_count": 2,
-      "partners": "DC Fawcett | Jimmy Doheny"
-    },
-    {
       "company": "F\u00f6rderkompass UG",
       "lead_id": "lead_VCHbUD2TiIucBq0CGeDqJDmJxusI2fvAgJa1HOOkEaS",
       "status": "Canceled",
@@ -434,13 +434,6 @@
       "partners": "Alexander Daskaloff | Victoria Lukianenko"
     },
     {
-      "company": "C&E Digital GmbH",
-      "lead_id": "lead_PF2JFlcWjvyIeaY8ITpzc80ZJCTYQJ4yOgOHEJsKgXl",
-      "status": "Customer",
-      "partner_count": 2,
-      "partners": "Justus Kraft | Muhammed Bagriacik"
-    },
-    {
       "company": "Wellsite Navigator",
       "lead_id": "lead_CK3gQWGbP6cCj40d0e9l6UKzl7gNJF5mQy8RgWGlvIS",
       "status": "Customer",
@@ -462,18 +455,18 @@
       "partners": "Muhammed Bagriacik | Ricardo Ruppert"
     },
     {
+      "company": "HIPERSA",
+      "lead_id": "lead_7SDb0dUxrvg3YfDwtDIulMJQ1oBGVZiCaQMVUt7J1kh",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Stefan Weingarten | Stefan Graf"
+    },
+    {
       "company": "Schlemmbach Coaching GmbH",
       "lead_id": "lead_iNe2iwrCQTN4wy1cAp8yONdqaai4eTURaKdbbeeSFwp",
       "status": "Customer",
       "partner_count": 2,
       "partners": "Muhammed Bagriacik | Sergej Dubowik"
-    },
-    {
-      "company": "Marketing MBA -- DEV",
-      "lead_id": "lead_aZ4fCLDmvIKRDguJwkFQnwzIuoGhhE3YcxExBJWN1Yq",
-      "status": "Customer",
-      "partner_count": 2,
-      "partners": "Xenios Charalambous | Christopher Meneses"
     },
     {
       "company": "Concrete Home Buyers",
@@ -511,18 +504,18 @@
       "partners": "Luka Jukic | Justus Kraft"
     },
     {
+      "company": "Cyberwrite",
+      "lead_id": "lead_7NuxT98dUDLQoEj3RhhnwhJMJTeU61crbuUoUZbf7kj",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Pedro Elpidio Ponciano Lima | Michael Bassin"
+    },
+    {
       "company": "Makler Campus GmbH",
       "lead_id": "lead_brlzfI2EBd7pHvQO5KPCTGogaxdYN2pa5dCOowePhU1",
       "status": "Canceled",
       "partner_count": 2,
       "partners": "bj\u00f6rn ebersp\u00e4cher | Julian Golling"
-    },
-    {
-      "company": "Everflow Exellence Baukasten",
-      "lead_id": "lead_PSIny4jfzm4yCqoF8wHfWzqKprRZO0kG3K9MUltLCSl",
-      "status": "Customer",
-      "partner_count": 2,
-      "partners": "Emil Wagner | Muhammed Bagriacik"
     },
     {
       "company": "Performance Recruiting GmbH",
@@ -553,6 +546,20 @@
       "partners": "Victoria Lukianenko | Jason Arenstein"
     },
     {
+      "company": "The Prosperity Club, LLC - Charged Up University",
+      "lead_id": "lead_7ThqmjD24TDjY1wpEfES8Mw7cZL8SfqKsS43anmqW6p",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Pedro Elpidio Ponciano Lima | Mariah Williamson"
+    },
+    {
+      "company": "ISI Transport- und Verpackungsmittel GmbH",
+      "lead_id": "lead_KBZUGPMI81XE4JM6AIfT8LqWd4fUzEGI4cWNdbW5as9",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Henrik Hamann | Muhammed Bagriacik"
+    },
+    {
       "company": "N8 Media Group",
       "lead_id": "lead_rQQOt4KURFHshubHwO5skjUqS2hbll7ehod3oc2UJD5",
       "status": "Customer",
@@ -565,6 +572,13 @@
       "status": "Canceled",
       "partner_count": 2,
       "partners": "Unknown | Unknown"
+    },
+    {
+      "company": "hairfree GmbH",
+      "lead_id": "lead_Mt8SBBLWZB58O41kKP8mjgi3NgWDXz5RbaLaZdpYBCF",
+      "status": "Customer",
+      "partner_count": 2,
+      "partners": "Henrik Hamann | Christopher Meneses"
     },
     {
       "company": "PERSOX",
@@ -607,6 +621,13 @@
       "status": "Customer",
       "partner_count": 2,
       "partners": "Muhammed Bagriacik | Kevin Kohler"
+    },
+    {
+      "company": "BAMF.com",
+      "lead_id": "lead_lkgv20VxhDomyVXYIR9ul53PeSvcb67rjlQCm01ZuJG",
+      "status": "Canceled",
+      "partner_count": 2,
+      "partners": "Mariah Williamson | Jason Arenstein"
     },
     {
       "company": "Abbots Butcher Inc.",
